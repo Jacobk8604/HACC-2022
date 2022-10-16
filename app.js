@@ -1,9 +1,18 @@
+if (process.env.NODE_ENV != 'production') require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
 const fs = require('fs');
+
+const PassportInit = require('./utils/passport-init');
+new PassportInit(passport);
 
 const app = express();
 
@@ -15,13 +24,24 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 for (const file of fs.readdirSync('./routes')) {
-    if (!file.startsWith('index') && file.endsWith('.js')) {
-        app.use(`/${file.replace('.js', '')}`, require(`./routes/${file}`));
-    }
+    if (!file.endsWith('.js') || file.startsWith('index')) continue;
+
+    const route = file.replace('.js', '');
+    const path = `./routes/${file}`;
+    app.use(`/${route}`, require(path));
 }
 
 // catch 404 and forward to error handler

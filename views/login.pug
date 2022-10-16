@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    body
+        h1 Login
+        p
+            | Don't have an account? 
+            a(href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer") Contact TOD
+            |  for one.
+        form(action="/login", method="post") 
+            input(type="text" placeholder="Enter email" name="email")
+            br
+            input(type="password" placeholder="Enter password" name="pass")
+            br
+            br
+            button(type="submit") Login
+    script(src="/javascripts/login.js")
