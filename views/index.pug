@@ -1,5 +1,21 @@
-extends layout
-
-block content
-    h1= title
-    p Welcome to #{title}
+doctype html
+html(lang='en')
+  head
+    link(rel='stylesheet' type='text/css' href='style.css')
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=, initial-scale=1.0')
+    title Document
+  body
+    #siNavBar
+      nav
+        a(href='')
+        a(href='')
+    #siHeadDiv
+      h1#siHeader Welcome to the TOD Project Reporting Site
+      p The Office of Planning and Sustainable Development
+    #siInputDiv
+      p Sign In Here:
+      input(|id='siUsername' type='text' placeholder='Username')
+      input#siUPassword(type='text' placeholder='Password')
+      button Submit

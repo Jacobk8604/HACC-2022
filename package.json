@@ -23,5 +23,17 @@
   "devDependencies": {
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.20"
-  }
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alohabeach/HACC-2022.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alohabeach/HACC-2022/issues"
+  },
+  "homepage": "https://github.com/alohabeach/HACC-2022#readme",
+  "description": ""
 }
